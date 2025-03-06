@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuario</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6 flex justify-center items-center h-screen">
+
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h1 class="text-xl font-bold text-gray-800 mb-4">Editar Usuario</h1>
+
+        <form th:action="@{/admin/usuarios/editar/{id}(id=${usuario.id})}" method="post">
+            <!-- El input hidden es redundante ya que el ID va en la URL -->
+            <!-- <input type="hidden" name="id" th:value="${usuario.id}"> -->
+            
+            <label class="block text-gray-700">Nombre:</label>
+            <input type="text" name="nombre" th:value="${usuario.nombre}" 
+                   class="w-full border p-2 rounded mb-2" required>
+            
+            <label class="block text-gray-700">Email:</label>
+            <input type="email" name="email" th:value="${usuario.email}" 
+                   class="w-full border p-2 rounded mb-2" required>
+            
+            <label class="block text-gray-700">Nueva Contraseña (opcional):</label>
+            <input type="password" name="password" 
+                   class="w-full border p-2 rounded mb-4">
+            
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                Guardar Cambios
+            </button>
+        </form>
+
+        <div class="mt-4">
+            <a href="/admin/usuarios" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 transition">Cancelar</a>
+        </div>
+    </div>
+
+</body>
+</html>
