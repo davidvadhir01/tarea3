@@ -7,6 +7,7 @@ import com.example.demo.repository.RolRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +23,8 @@ public class AdminInitializer implements CommandLineRunner {
     @Autowired
     private RolRepository rolRepository;
     
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    // Creamos el passwordEncoder directamente en lugar de inyectarlo
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     
     @Override
     public void run(String... args) throws Exception {

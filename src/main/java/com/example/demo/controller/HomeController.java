@@ -36,4 +36,10 @@ public String home(Authentication authentication, Model model) {
         model.addAttribute("usuario", authentication.getName());
         return "admin";
     }
+
+    @GetMapping("/v1/home")
+public String homeV1() {
+    return "redirect:/home";
+}
+
 }

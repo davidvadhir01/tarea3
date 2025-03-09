@@ -35,7 +35,13 @@ public class PerfilController {
             Usuario usuario = usuarioRepository.findByNombre(userDetails.getUsername())
                     .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
             
+            // Verificar si el usuario tiene el rol de administrador
+            boolean isAdmin = userDetails.getAuthorities().stream()
+                    .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+            
             model.addAttribute("usuario", usuario);
+            model.addAttribute("isAdmin", isAdmin); // Añadir bandera para verificar si es admin
+            
             return "editar_perfil";
         } catch (Exception e) {
             // Log del error
@@ -69,5 +75,7 @@ public class PerfilController {
             System.err.println("Error al actualizar perfil: " + e.getMessage());
             return "redirect:/perfil/editar?error=true";
         }
+
+        
     }
 }
